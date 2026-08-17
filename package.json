@@ -1,0 +1,18 @@
+{
+  "name": "clutchup-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static marketing and support website for ClutchUp. Plain HTML/CSS/JS — no framework, no build step required to deploy.",
+  "type": "module",
+  "scripts": {
+    "legal": "node scripts/build-legal.mjs",
+    "verify": "node scripts/verify-legal.mjs",
+    "build": "npm run legal && npm run verify",
+    "set-url": "node scripts/set-site-url.mjs",
+    "set-appstore": "node scripts/set-appstore-link.mjs",
+    "serve": "npx --yes serve@14 . -l 4321"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

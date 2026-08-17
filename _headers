@@ -1,0 +1,18 @@
+# Cloudflare Pages / Netlify response headers.
+# Ignored by GitHub Pages (which serves its own headers) — harmless to keep.
+
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), interest-cohort=()
+  Content-Security-Policy: default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'
+
+# Fingerprint-free assets: revalidate rather than cache forever, so a CSS or JS
+# change goes live immediately instead of being pinned for a year.
+/assets/css/*
+  Cache-Control: public, max-age=0, must-revalidate
+/assets/js/*
+  Cache-Control: public, max-age=0, must-revalidate
+/assets/img/*
+  Cache-Control: public, max-age=604800

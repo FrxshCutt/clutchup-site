@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<style>
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    width: 1200px; height: 630px; overflow: hidden;
+    background: #050506; color: #fcfbfb;
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    display: flex; align-items: center;
+    padding: 0 84px; position: relative;
+  }
+  .glow { position: absolute; inset: -30% -10%; filter: blur(60px); }
+  .glow span { position: absolute; border-radius: 50%; display: block; }
+  .g1 { top: 6%; left: 2%; width: 620px; height: 620px; background: radial-gradient(circle, rgba(123,38,220,0.8), transparent 66%); }
+  .g2 { top: 30%; right: 2%; width: 520px; height: 520px; background: radial-gradient(circle, rgba(155,77,242,0.55), transparent 68%); }
+  .grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 74px 74px;
+    -webkit-mask-image: radial-gradient(ellipse 80% 70% at 40% 45%, #000 20%, transparent 78%);
+  }
+  .content { position: relative; max-width: 720px; }
+  .brand { display: flex; align-items: center; gap: 16px; margin-bottom: 40px; }
+  .brand img { width: 60px; height: 60px; border-radius: 16px; }
+  .brand b { font-size: 34px; font-weight: 700; letter-spacing: -0.03em; }
+  h1 { font-size: 66px; line-height: 1.06; letter-spacing: -0.035em; font-weight: 700; }
+  .grad { background: linear-gradient(104deg, #fff 6%, #9B4DF2 54%, #d9bcff 94%); -webkit-background-clip: text; color: transparent; }
+  p { margin-top: 26px; font-size: 25px; line-height: 1.5; color: #a2a5b0; max-width: 620px; }
+  .pill {
+    position: absolute; right: 84px; bottom: 64px;
+    padding: 13px 24px; border: 1px solid rgba(255,255,255,0.16); border-radius: 999px;
+    background: rgba(255,255,255,0.04); font-size: 19px; font-weight: 600; color: #a2a5b0;
+  }
+  .wheel { position: absolute; right: -40px; top: 50%; transform: translateY(-50%); width: 460px; height: 460px; opacity: 0.92; }
+</style></head>
+<body>
+  <div class="glow"><span class="g1"></span><span class="g2"></span></div>
+  <div class="grid"></div>
+  <img class="wheel" src="logo.png" alt="">
+  <div class="content">
+    <div class="brand"><img src="logo.png" alt=""><b>ClutchUp</b></div>
+    <h1>Pass your driving test with an <span class="grad">AI coach that reviews every drive.</span></h1>
+    <p>An examiner-style debrief after every practice drive. Built for UK learner drivers.</p>
+  </div>
+  <div class="pill">clutchup</div>
+</body></html>
