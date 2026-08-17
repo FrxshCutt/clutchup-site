@@ -6,7 +6,11 @@
   X-Frame-Options: DENY
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: geolocation=(), microphone=(), camera=(), interest-cohort=()
-  Content-Security-Policy: default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'
+  # The script-src hash covers the one inline bootstrap in every page's <head>:
+  #   <script>document.documentElement.className+=" js"</script>
+  # If you ever change that line, recompute the hash or the reveals stop working:
+  #   printf '%s' 'document.documentElement.className+=" js"' | openssl dgst -sha256 -binary | openssl base64
+  Content-Security-Policy: default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'sha256-pfgOMgfVZwm2ODyms34QYW9h8EwicylhV77q5LHK8c0='; base-uri 'self'; form-action 'none'; frame-ancestors 'none'
 
 # Fingerprint-free assets: revalidate rather than cache forever, so a CSS or JS
 # change goes live immediately instead of being pinned for a year.
