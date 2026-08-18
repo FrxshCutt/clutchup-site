@@ -1,0 +1,17 @@
+# Netlify build configuration.
+#
+# This site is plain static files — there is nothing to compile — so the build
+# command is intentionally empty and the whole repo root is published as-is.
+# Declaring it here means Netlify never tries to auto-detect a build from the
+# package.json (whose scripts are local authoring tools, not a site build).
+#
+# Redirects and response headers live in the `_redirects` and `_headers` files
+# rather than here, so the same rules also work if this is ever moved to
+# Cloudflare Pages.
+
+[build]
+  command = ""
+  publish = "."
+
+[build.environment]
+  NODE_VERSION = "20"

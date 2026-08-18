@@ -4,8 +4,9 @@
     {
       "name": "clutchup-site",
       "runtimeExecutable": "npx",
-      "runtimeArgs": ["--yes", "serve@14", ".", "-l", "4321", "--no-clipboard"],
-      "port": 4321
+      "runtimeArgs": ["--yes", "serve@14", ".", "--no-clipboard"],
+      "port": 4321,
+      "autoPort": true
     }
   ]
 }

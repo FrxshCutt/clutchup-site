@@ -8,3 +8,9 @@
 /terms.html      /terms       301
 /privacy-policy  /privacy     301
 /how-it-works.html /how-it-works 301
+
+# Canonicalise www → apex so only one hostname is ever indexed, and so the
+# exact URLs in the App Store listing are the ones that serve the content.
+# (Netlify also does this automatically once a primary domain is set; this
+# makes it explicit and portable.)
+https://www.clutchup.co.uk/*   https://clutchup.co.uk/:splat   301!

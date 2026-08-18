@@ -1,7 +1,7 @@
 # ClutchUp — marketing & support website
 
-The static website for ClutchUp. Replaces the Lovable-hosted site so it can be
-hosted free on GitHub Pages, Cloudflare Pages or Netlify.
+The static website for ClutchUp, served free on Netlify at
+**https://clutchup.co.uk** (replacing the Lovable-hosted site).
 
 **Six routes, all real directories, all clean URLs:**
 
@@ -29,9 +29,10 @@ matters because:
   when a dependency updates.
 - **Nothing to host but files.** No server, no Node runtime, no database, no
   API routes — which is exactly what the free tiers give you.
-- **Fast by construction.** One 20 KB stylesheet, one 4 KB script, no webfonts
-  (the system font stack means zero font requests), no third-party JS. There is
-  no framework runtime to download and parse before anything renders.
+- **Fast by construction.** One 43 KB stylesheet, one 7 KB script, a 3 KB logo,
+  no webfonts (the system font stack means zero font requests) and no
+  third-party JS. There is no framework runtime to download and parse before
+  anything renders.
 - **All internal links are relative.** The site works identically at a domain
   root (`clutchup.co.uk`) or under a project subpath
   (`yourname.github.io/clutchup`) with no rebuild.
@@ -41,99 +42,139 @@ the legal pages and stamp in URLs. They are not part of serving the site.
 
 ---
 
-## Deploy it free — GitHub Pages
+## Deploy free to Netlify, on clutchup.co.uk
 
-The fastest route. Roughly five minutes.
+**Why Netlify here rather than Cloudflare Pages:** both are free and both give
+free auto-renewing SSL, but Cloudflare Pages needs an *apex* domain
+(`clutchup.co.uk`, no `www.`) to use Cloudflare's own nameservers — meaning you
+move ALL DNS for the domain to Cloudflare, including any email MX records.
+Netlify attaches an apex domain with two ordinary records you add at your
+existing registrar. Since you want to add records where the domain is
+registered, Netlify is the lower-risk path. (Cloudflare Pages instructions are
+further down if you'd rather use it.)
 
-### 1. Set your site URL
+The site URL is already stamped in as `https://clutchup.co.uk` — canonical
+tags, OpenGraph tags, `sitemap.xml` and `robots.txt`.
 
-Pick the URL first, because it goes into the `canonical` and OpenGraph tags.
-For a GitHub Pages project site it is `https://<username>.github.io/<repo>`:
-
-```bash
-cd ~/clutchup-site && node scripts/set-site-url.mjs https://YOURNAME.github.io/clutchup
-```
-
-This stamps the absolute URLs, generates `sitemap.xml` and `robots.txt`, and
-re-bases the 404 page's links. It is safe to re-run if the URL changes later.
-
-### 2. Create the repo and push
+### 1. Push the repo to GitHub
 
 ```bash
-cd ~/clutchup-site && git init -b main && git add -A && git commit -m "ClutchUp website" && gh repo create clutchup --public --source=. --push
+cd ~/clutchup-site && git add -A && git commit -m "Configure clutchup.co.uk" && gh repo create clutchup-site --public --source=. --push
 ```
 
-No `gh` CLI? Create an empty **public** repo called `clutchup` on github.com,
-then:
+No `gh` CLI? Create an empty repo on github.com, then
+`git remote add origin <url> && git push -u origin main`.
+
+### 2. Create the Netlify site
+
+1. Sign up / log in at **app.netlify.com** (free "Personal" plan — no card).
+2. **Add new site** → **Import an existing project** → **GitHub** → authorise →
+   pick the repo.
+3. Build settings — `netlify.toml` already declares these, so just confirm:
+   - **Build command:** *empty*
+   - **Publish directory:** `.`
+4. **Deploy.** You get a temporary URL like `random-name-123.netlify.app`.
+   Check it works before touching DNS.
+
+### 3. Attach clutchup.co.uk
+
+In Netlify: **Site configuration** → **Domain management** → **Add a domain** →
+enter `clutchup.co.uk` → **Verify** → **Add domain**.
+
+Netlify will also offer to add `www.clutchup.co.uk`. Add it too, then set
+**`clutchup.co.uk` as the primary domain** — Netlify then permanently redirects
+www → apex, so only your App Store URLs are ever served.
+
+### 4. DNS records — add these at your registrar
+
+Wherever `clutchup.co.uk` is registered (123-reg, Namecheap, GoDaddy, IONOS…),
+open its **DNS** / **Advanced DNS** / **Manage DNS** panel and add:
+
+| Type | Host / Name | Value | TTL |
+| --- | --- | --- | --- |
+| `A` | `@` (or blank, or `clutchup.co.uk`) | `75.2.60.5` | Automatic / 3600 |
+| `CNAME` | `www` | `<your-site>.netlify.app` | Automatic / 3600 |
+
+> **Read the IP off Netlify's own screen, not off this table.** When you add the
+> domain, Netlify displays the exact A record value to use. `75.2.60.5` is its
+> published load-balancer address, but Netlify is the authority — if its
+> dashboard shows something different, use what the dashboard says.
+
+Notes:
+- Some registrars write the apex as `@`, some want the field left blank, some
+  want the full `clutchup.co.uk`. All three mean the same thing.
+- The CNAME value must end in `.netlify.app` and is shown in your Netlify
+  dashboard. Do **not** point the CNAME at `75.2.60.5`.
+- **Delete any existing A / CNAME / "parking" / "under construction" records
+  for `@` and `www`** left over from the registrar's default page, or they will
+  conflict.
+- Leave `MX` and `TXT` records alone — those are email and domain verification,
+  and this change does not affect them.
+
+### 5. HTTPS
+
+Once DNS resolves (usually minutes; allow up to 24h for full propagation),
+Netlify provisions a free Let's Encrypt certificate automatically.
+
+Netlify → **Domain management** → **HTTPS**:
+- Wait for **"Your site has HTTPS enabled"**. If it's still pending after DNS
+  has propagated, click **Verify DNS configuration** then **Provision
+  certificate**.
+- Turn **Force HTTPS** ON. This 301-redirects every `http://` request to
+  `https://` — which is what makes the Apple-facing URLs safe to submit.
+
+Certificates auto-renew. There is nothing to maintain.
+
+### 6. Verify before you touch App Store Connect
 
 ```bash
-cd ~/clutchup-site && git remote add origin https://github.com/YOURNAME/clutchup.git && git push -u origin main
+for p in / /support /privacy /terms /how-it-works /pricing; do echo "$p -> $(curl -s -o /dev/null -w '%{http_code}' -L https://clutchup.co.uk$p)"; done
 ```
 
-### 3. Turn on Pages
+All six must print `200`. Then confirm http → https and www → apex:
 
-On github.com → your repo → **Settings** → **Pages** →
-**Build and deployment** → **Source: Deploy from a branch** →
-Branch: **`main`**, folder: **`/ (root)`** → **Save**.
+```bash
+curl -sI http://clutchup.co.uk/support | head -1 && curl -sI https://www.clutchup.co.uk/privacy | head -1
+```
 
-*(Alternative: choose **Source: GitHub Actions** instead, and the included
-`.github/workflows/deploy.yml` takes over with a proper deploy log. Either
-works — the branch option needs no workflow at all.)*
-
-### 4. Wait ~60 seconds, then check your URL
-
-**`https://YOURNAME.github.io/clutchup`**
-
-Your two App Store URLs will be:
-
-- Support — `https://YOURNAME.github.io/clutchup/support`
-- Privacy Policy — `https://YOURNAME.github.io/clutchup/privacy`
-
-Both work without a trailing slash; GitHub Pages redirects to the directory index.
-
-> **Repo name shortcut:** name the repo `YOURNAME.github.io` instead and the
-> site is served at `https://YOURNAME.github.io` with no subpath at all. Set
-> the site URL accordingly in step 1.
+Both should show a `301`, landing on the `https://clutchup.co.uk/...` equivalent.
 
 ---
 
-## Deploy it free — Cloudflare Pages
+## Alternative: Cloudflare Pages
 
-Also free, faster CDN, and gives you a `*.pages.dev` subdomain.
+Same cost, but attaching the apex domain requires moving your nameservers to
+Cloudflare (which moves all your DNS, email included).
 
-1. Push the repo to GitHub (steps 1–2 above).
-2. Cloudflare dashboard → **Workers & Pages** → **Create** → **Pages** →
-   **Connect to Git** → pick the repo.
-3. Build settings:
-   - **Framework preset:** `None`
-   - **Build command:** *leave completely empty*
-   - **Build output directory:** `/`
-4. **Save and Deploy.** You get `https://clutchup.pages.dev`.
-5. Re-run step 1 with that URL so the canonical tags match:
+1. Add the site: Cloudflare dashboard → **Workers & Pages** → **Create** →
+   **Pages** → **Connect to Git** → pick the repo.
+2. Build settings: **Framework preset** `None`, **Build command** *empty*,
+   **Build output directory** `/`.
+3. Add the domain to Cloudflare: **Add a site** → `clutchup.co.uk` → Free plan →
+   Cloudflare shows two nameservers.
+4. At your registrar, replace the existing nameservers with Cloudflare's. This
+   takes anywhere from minutes to 24h.
+5. Pages project → **Custom domains** → **Set up a custom domain** →
+   `clutchup.co.uk`. Cloudflare adds the DNS record itself (CNAME flattening
+   handles the apex) and issues the certificate.
+6. SSL/TLS → **Overview** → set encryption mode to **Full (strict)**, and
+   SSL/TLS → **Edge Certificates** → turn on **Always Use HTTPS**.
 
-```bash
-node scripts/set-site-url.mjs https://clutchup.pages.dev && git commit -am "Set site URL" && git push
-```
-
-`_headers` and `_redirects` are already in the repo and are picked up
-automatically by Cloudflare Pages and Netlify (and harmlessly ignored by
-GitHub Pages).
-
----
-
-## ⚠️ After deploying — before taking the Lovable site down
-
-**Update App Store Connect first.** Go to App Store Connect → your app →
-**App Information** and change:
-
-- **Support URL** → `https://<your-new-site>/support`
-- **Privacy Policy URL** → `https://<your-new-site>/privacy`
-
-Save, and confirm both load in a browser. **Only then** delete or unpublish the
-Lovable site. If the old URLs go dead while App Store Connect still points at
-them, your listing has broken required links — which can hold up a review.
+`_headers` and `_redirects` are read by Cloudflare Pages too, so the security
+headers and redirect rules carry over unchanged.
 
 ---
+
+## ⚠️ App Store Connect — after HTTPS is confirmed live
+
+App Store Connect → your app → **App Information**:
+
+- **Support URL** → `https://clutchup.co.uk/support`
+- **Privacy Policy URL** → `https://clutchup.co.uk/privacy`
+
+Save, then load both in a browser to confirm. **Only then** take the Lovable
+site down. If the old URLs die while App Store Connect still points at them,
+your listing has broken required links, which can hold up a review.
 
 ## Filling in the App Store link
 
@@ -215,7 +256,8 @@ scripts/set-site-url.mjs     stamps canonical/OG URLs + sitemap + robots
 scripts/set-appstore-link.mjs fills in every App Store button
 scripts/og-template.html     source of assets/img/og.png
 
-_headers, _redirects     Cloudflare Pages / Netlify (ignored by GitHub Pages)
+netlify.toml             Netlify build config (no build command, publish root)
+_headers, _redirects     Netlify / Cloudflare Pages (ignored by GitHub Pages)
 .nojekyll                stops GitHub Pages running Jekyll over the files
 .github/workflows/       optional GitHub Actions deploy
 ```
