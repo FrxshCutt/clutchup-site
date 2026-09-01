@@ -169,6 +169,28 @@
     headings.forEach(function (h) { spy.observe(h); });
   }
 
+  /* --- Android visitors: iPhone-only notice, visible without scrolling ---- */
+
+  if (/Android/i.test(navigator.userAgent)) {
+    var dismissed = false;
+    try { dismissed = sessionStorage.getItem('cu-android-note') === '1'; } catch (e) { /* blocked storage */ }
+    if (!dismissed) {
+      // NOTE: named to avoid shadowing the reading-progress `bar` above —
+      // a `var` redeclaration here would rebind that closure's element.
+      var androidBar = document.createElement('div');
+      androidBar.className = 'android-bar';
+      androidBar.setAttribute('role', 'status');
+      androidBar.innerHTML =
+        '<p><strong>ClutchUp is an iPhone app.</strong> It\u2019s not yet available on Android.</p>' +
+        '<button type="button" aria-label="Dismiss">\u00d7</button>';
+      androidBar.querySelector('button').addEventListener('click', function () {
+        androidBar.remove();
+        try { sessionStorage.setItem('cu-android-note', '1'); } catch (e) { /* ignore */ }
+      });
+      document.body.appendChild(androidBar);
+    }
+  }
+
   /* --- Current year in the footer ---------------------------------------- */
 
   document.querySelectorAll('[data-year]').forEach(function (el) {

@@ -412,7 +412,10 @@ h3, .h3 { font-size: clamp(1.15rem, 2.1vw, 1.4rem); letter-spacing: -0.02em; }
 .nav.is-open .nav__toggle span::before { transform: translateY(6px) rotate(45deg); }
 .nav.is-open .nav__toggle span::after { transform: translateY(-6px) rotate(-45deg); }
 
-@media (max-width: 860px) {
+/* Breakpoint raised 860 → 1080 when the nav gained Guides + About and the
+   longer iPhone CTA: the full row needs ~860px of content width, so mid-size
+   viewports must get the drawer, not an overflowing bar. */
+@media (max-width: 1080px) {
   .nav__toggle { display: inline-flex; }
   .nav__cta { display: none; }
   .nav__links {
@@ -1255,8 +1258,15 @@ h3, .h3 { font-size: clamp(1.15rem, 2.1vw, 1.4rem); letter-spacing: -0.02em; }
   align-items: start;
   padding-block: clamp(40px, 6vw, 70px);
 }
+/* Grid items default to min-width:auto, which floors them at their
+   min-content size — a wide table child then stretches the ITEM past the
+   track and blows out the page even with minmax(0,1fr) tracks. */
+.legal-layout > * { min-width: 0; }
 @media (max-width: 940px) {
-  .legal-layout { grid-template-columns: 1fr; }
+  /* minmax(0,1fr), not bare 1fr: 1fr's min-content floor lets a wide child
+     (the guide data tables, min-width 480px) stretch the column instead of
+     scrolling inside .table-scroll — the classic grid blowout. */
+  .legal-layout { grid-template-columns: minmax(0, 1fr); }
 }
 
 .toc {
@@ -1512,3 +1522,81 @@ h3, .h3 { font-size: clamp(1.15rem, 2.1vw, 1.4rem); letter-spacing: -0.02em; }
 
   .progress { transition: none; }
 }
+
+/* --- 20. iOS-only messaging ---------------------------------------------- */
+
+.ios-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--ink-faint);
+  font-size: 13.5px;
+}
+.ios-note::before {
+  content: "";
+  width: 13px; height: 13px;
+  background: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor'%3E%3Cpath d='M17.05 12.54c-.02-2.24 1.83-3.31 1.91-3.36-1.04-1.52-2.66-1.73-3.24-1.76-1.38-.14-2.69.81-3.39.81-.7 0-1.78-.79-2.93-.77-1.51.02-2.9.88-3.67 2.23-1.56 2.71-.4 6.72 1.12 8.92.74 1.08 1.63 2.29 2.79 2.25 1.12-.05 1.54-.72 2.9-.72s1.74.72 2.93.7c1.21-.02 1.97-1.1 2.71-2.18.85-1.25 1.2-2.46 1.22-2.52-.03-.01-2.34-.9-2.36-3.57zM14.86 5.6c.61-.75 1.03-1.78.91-2.82-.88.04-1.96.59-2.6 1.33-.57.66-1.07 1.72-.94 2.73.99.08 1.99-.5 2.63-1.24z'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor'%3E%3Cpath d='M17.05 12.54c-.02-2.24 1.83-3.31 1.91-3.36-1.04-1.52-2.66-1.73-3.24-1.76-1.38-.14-2.69.81-3.39.81-.7 0-1.78-.79-2.93-.77-1.51.02-2.9.88-3.67 2.23-1.56 2.71-.4 6.72 1.12 8.92.74 1.08 1.63 2.29 2.79 2.25 1.12-.05 1.54-.72 2.9-.72s1.74.72 2.93.7c1.21-.02 1.97-1.1 2.71-2.18.85-1.25 1.2-2.46 1.22-2.52-.03-.01-2.34-.9-2.36-3.57zM14.86 5.6c.61-.75 1.03-1.78.91-2.82-.88.04-1.96.59-2.6 1.33-.57.66-1.07 1.72-.94 2.73.99.08 1.99-.5 2.63-1.24z'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+/* Android visitors: immediate, honest, dismissible. Injected by site.js only
+   when the user agent is Android, fixed to the bottom so it is on screen
+   without scrolling on a phone. */
+.android-bar {
+  position: fixed;
+  left: 12px; right: 12px; bottom: 12px;
+  z-index: 150;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 16px;
+  border: 1px solid var(--hairline-strong);
+  border-radius: 16px;
+  background: rgba(16, 16, 20, 0.96);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 18px 44px -18px rgba(0, 0, 0, 0.9);
+  font-size: 14px;
+  color: var(--ink);
+}
+.android-bar p { flex: 1; line-height: 1.45; }
+.android-bar p strong { font-weight: 650; }
+.android-bar button {
+  flex: none;
+  width: 32px; height: 32px;
+  border: 1px solid var(--hairline-strong);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--ink-soft);
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* --- 21. Guide data tables ------------------------------------------------ */
+
+.table-scroll { overflow-x: auto; margin: 22px 0; }
+.data-table {
+  width: 100%;
+  min-width: 480px;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+.data-table th, .data-table td {
+  padding: 10px 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--hairline);
+}
+.data-table th {
+  color: var(--ink-faint);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.data-table td { color: #d3d5dc; }
+.data-table td:last-child, .data-table th:last-child { text-align: right; }
+.data-table tr:hover td { background: rgba(255, 255, 255, 0.025); }
+.data-table .hi { color: var(--clean); font-weight: 650; }
+.data-table .lo { color: var(--serious); font-weight: 650; }

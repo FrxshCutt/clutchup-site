@@ -95,6 +95,12 @@ const ROUTES = [
   { path: '/how-it-works', priority: '0.8' },
   { path: '/pricing', priority: '0.8' },
   { path: '/support', priority: '0.9' },
+  { path: '/about', priority: '0.6' },
+  { path: '/guides', priority: '0.7' },
+  { path: '/guides/how-many-driving-lessons', priority: '0.7' },
+  { path: '/guides/driving-test-pass-rates', priority: '0.7' },
+  { path: '/guides/why-people-fail-driving-test', priority: '0.7' },
+  { path: '/guides/driving-test-day', priority: '0.7' },
   { path: '/privacy', priority: '0.5' },
   { path: '/terms', priority: '0.5' },
 ];

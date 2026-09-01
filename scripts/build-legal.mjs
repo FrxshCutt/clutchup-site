@@ -258,10 +258,12 @@ function page({ slugPath, title, metaTitle, description, version, effective, toc
       <a href="../">Home</a>
       <a href="../how-it-works/">How it works</a>
       <a href="../pricing/">Pricing</a>
+      <a href="../guides/">Guides</a>
       <a href="../support/">Support</a>
-      <a class="nav__cta-mobile" href="${APPSTORE}">Download app</a>
+      <a href="../about/">About</a>
+      <a class="nav__cta-mobile" href="${APPSTORE}">Download for iPhone</a>
     </div>
-    <a class="btn btn--primary nav__cta" href="${APPSTORE}">Download app</a>
+    <a class="btn btn--primary nav__cta" href="${APPSTORE}">Download for iPhone</a>
     <button class="nav__toggle" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
       <span></span>
     </button>
@@ -302,7 +304,7 @@ ${body}
         version ${escapeHtml(version)}, effective ${escapeHtml(prettyDate(effective))} — and it
         matches the document shown in the ClutchUp app under Profile → Legal.
         See also the <a href="../${otherDoc.href}">${escapeHtml(otherDoc.label)}</a>, or email
-        <a href="mailto:clutchup.support@gmail.com">clutchup.support@gmail.com</a> with any question
+        <a href="mailto:support@clutchup.co.uk">support@clutchup.co.uk</a> with any question
         about it.
       </div>
     </article>
@@ -320,7 +322,7 @@ ${body}
           <img src="../assets/img/logo-64.png" width="32" height="32" alt="" decoding="async">
           ClutchUp
         </a>
-        <p>An AI driving coach for UK learner drivers. An examiner-style debrief after every practice drive.</p>
+        <p>An AI driving coach for UK learner drivers. Clear AI feedback on every practice drive.</p>
       </div>
       <div class="footer__nav">
         <div class="footer__col">
@@ -330,9 +332,17 @@ ${body}
           <a href="../pricing/">Pricing</a>
         </div>
         <div class="footer__col">
+          <h4>Guides</h4>
+          <a href="../guides/how-many-driving-lessons/">How many lessons?</a>
+          <a href="../guides/driving-test-pass-rates/">Pass rates by centre</a>
+          <a href="../guides/why-people-fail-driving-test/">Why people fail</a>
+          <a href="../guides/driving-test-day/">Test day explained</a>
+        </div>
+        <div class="footer__col">
           <h4>Help</h4>
           <a href="../support/">Support</a>
-          <a href="mailto:clutchup.support@gmail.com">Email us</a>
+          <a href="../about/">About</a>
+          <a href="mailto:support@clutchup.co.uk">Email us</a>
         </div>
         <div class="footer__col">
           <h4>Legal</h4>
@@ -342,8 +352,8 @@ ${body}
       </div>
     </div>
     <div class="footer__bottom">
-      <p><a href="mailto:clutchup.support@gmail.com">clutchup.support@gmail.com</a> · © <span data-year>2026</span> ClutchUp</p>
-      <p class="footer__legal-line">Not affiliated with the DVSA.</p>
+      <p><a href="mailto:support@clutchup.co.uk">support@clutchup.co.uk</a> · © <span data-year>2026</span> ClutchUp</p>
+      <p class="footer__legal-line">ClutchUp is not affiliated with, endorsed by, or connected to the DVSA, and does not provide official test results.</p>
     </div>
   </div>
 </footer>

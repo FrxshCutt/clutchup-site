@@ -2,32 +2,62 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://clutchup.co.uk/</loc>
-    <lastmod>2026-08-18</lastmod>
+    <lastmod>2026-09-01</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://clutchup.co.uk/how-it-works</loc>
-    <lastmod>2026-08-18</lastmod>
+    <lastmod>2026-09-01</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://clutchup.co.uk/pricing</loc>
-    <lastmod>2026-08-18</lastmod>
+    <lastmod>2026-09-01</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://clutchup.co.uk/support</loc>
-    <lastmod>2026-08-18</lastmod>
+    <lastmod>2026-09-01</lastmod>
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://clutchup.co.uk/about</loc>
+    <lastmod>2026-09-01</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://clutchup.co.uk/guides</loc>
+    <lastmod>2026-09-01</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://clutchup.co.uk/guides/how-many-driving-lessons</loc>
+    <lastmod>2026-09-01</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://clutchup.co.uk/guides/driving-test-pass-rates</loc>
+    <lastmod>2026-09-01</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://clutchup.co.uk/guides/why-people-fail-driving-test</loc>
+    <lastmod>2026-09-01</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://clutchup.co.uk/guides/driving-test-day</loc>
+    <lastmod>2026-09-01</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://clutchup.co.uk/privacy</loc>
-    <lastmod>2026-08-18</lastmod>
+    <lastmod>2026-09-01</lastmod>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://clutchup.co.uk/terms</loc>
-    <lastmod>2026-08-18</lastmod>
+    <lastmod>2026-09-01</lastmod>
     <priority>0.5</priority>
   </url>
 </urlset>

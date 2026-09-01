@@ -7,12 +7,23 @@ The static website for ClutchUp, served free on Netlify at
 
 | Route | File | Notes |
 | --- | --- | --- |
-| `/` | `index.html` | Home |
+| `/` | `index.html` | Home (learner + parent sections) |
 | `/how-it-works` | `how-it-works/index.html` | Full explainer |
 | `/pricing` | `pricing/index.html` | Information only — no checkout |
 | `/support` | `support/index.html` | **App Store Support URL** |
+| `/about` | `about/index.html` | Who builds it and why |
+| `/guides` | `guides/index.html` | Guides hub |
+| `/guides/how-many-driving-lessons` | `guides/…/index.html` | SEO guide |
+| `/guides/driving-test-pass-rates` | `guides/…/index.html` | SEO guide — real DVSA data (DRT121A/DRT122A) |
+| `/guides/why-people-fail-driving-test` | `guides/…/index.html` | SEO guide — DVSA top-10 faults (DRT121F) |
+| `/guides/driving-test-day` | `guides/…/index.html` | SEO guide |
 | `/privacy` | `privacy/index.html` | **App Store Privacy Policy URL** — generated |
 | `/terms` | `terms/index.html` | Generated |
+
+Support email everywhere is **support@clutchup.co.uk**. The legal page BODIES
+still show the old gmail address because they render the app repo's legal
+documents verbatim — update `routeready/lib/legal/*.ts` (with a version bump)
+and re-run `npm run build` here to change them.
 
 ---
 
