@@ -20,8 +20,26 @@ The static website for ClutchUp, served free on Netlify at
 | `/privacy` | `privacy/index.html` | **App Store Privacy Policy URL** — generated |
 | `/terms` | `terms/index.html` | Generated |
 
-Support email everywhere is **support@clutchup.co.uk**, including the legal
-pages (app repo legal docs are at v1.3, 2026-09-03).
+Support email everywhere is **clutchup.support@gmail.com**, including the legal
+pages (app repo legal docs are at v1.3, 2026-09-03). It is not hardcoded in the
+generated pages: `build-legal.mjs` reads it off the Privacy Policy's `**Contact:**`
+line, and `npm run verify` fails the build if any `mailto:` on any page disagrees
+with it. To change the address, change it in `routeready/lib/legal/privacy.ts`
+and `terms.ts`, then sweep the hand-written pages and run `npm run build`.
+
+## Screenshots
+
+Every phone on the site is a **real screenshot of the shipped app** — there are no
+mockups or renders, and there should never be any. They live in
+`assets/img/screens/` and are produced by:
+
+```
+./scripts/make-screenshots.sh
+```
+
+Read that script before replacing them: it resizes for the web *and* blurs the
+route-replay map on the drive-summary screen, which otherwise publishes legible
+street names around a real learner's home.
 
 ⚠️ **The pricing page's free-tier copy does not match the shipped app.** The
 page says free users get unlimited drives and scores with AI feedback as the

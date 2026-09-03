@@ -304,7 +304,7 @@ ${body}
         version ${escapeHtml(version)}, effective ${escapeHtml(prettyDate(effective))} — and it
         matches the document shown in the ClutchUp app under Profile → Legal.
         See also the <a href="../${otherDoc.href}">${escapeHtml(otherDoc.label)}</a>, or email
-        <a href="mailto:support@clutchup.co.uk">support@clutchup.co.uk</a> with any question
+        <a href="mailto:${SUPPORT_EMAIL}">${SUPPORT_EMAIL}</a> with any question
         about it.
       </div>
     </article>
@@ -342,7 +342,7 @@ ${body}
           <h4>Help</h4>
           <a href="../support/">Support</a>
           <a href="../about/">About</a>
-          <a href="mailto:support@clutchup.co.uk">Email us</a>
+          <a href="mailto:${SUPPORT_EMAIL}">Email us</a>
         </div>
         <div class="footer__col">
           <h4>Legal</h4>
@@ -352,7 +352,7 @@ ${body}
       </div>
     </div>
     <div class="footer__bottom">
-      <p><a href="mailto:support@clutchup.co.uk">support@clutchup.co.uk</a> · © <span data-year>2026</span> ClutchUp</p>
+      <p><a href="mailto:${SUPPORT_EMAIL}">${SUPPORT_EMAIL}</a> · © <span data-year>2026</span> ClutchUp</p>
       <p class="footer__legal-line">ClutchUp is not affiliated with, endorsed by, or connected to the DVSA, and does not provide official test results.</p>
     </div>
   </div>
@@ -367,6 +367,19 @@ ${body}
 
 const appRepo = findAppRepo();
 const legalDir = join(appRepo, 'lib/legal');
+
+/* The support address is not this site's to invent — it is whatever the legal
+   documents publish. Read it off the Privacy Policy's "Contact:" line so the
+   chrome around the document can never contradict the document itself. */
+const SUPPORT_EMAIL = (() => {
+  const { markdown } = extract(readFileSync(join(legalDir, 'privacy.ts'), 'utf8'), 'PRIVACY');
+  const m = markdown.match(/\*\*Contact:\*\*\s*([A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,})/);
+  if (!m) {
+    console.error('\n✗ No "**Contact:** <email>" line in the Privacy Policy — nothing to put in the page chrome.\n');
+    process.exit(1);
+  }
+  return m[1];
+})();
 
 const docs = [
   {

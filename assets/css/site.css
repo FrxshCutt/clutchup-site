@@ -180,7 +180,7 @@ section { position: relative; }
 }
 
 h1, .h1 { font-size: clamp(2.5rem, 5.6vw, 4.05rem); }
-/* The home hero splits its width with the phone mock, so its headline sits a
+/* The home hero splits its width with the phone screenshot, so its headline sits a
    step down from the full-width headlines on the other pages. */
 .hero__grid h1 { font-size: clamp(2.4rem, 4.6vw, 3.5rem); }
 h2, .h2 { font-size: clamp(2rem, 4.6vw, 3.1rem); }
@@ -550,24 +550,29 @@ h3, .h3 { font-size: clamp(1.15rem, 2.1vw, 1.4rem); letter-spacing: -0.02em; }
 
 @media (max-width: 980px) {
   .hero__grid { grid-template-columns: 1fr; }
-  /* Headline and CTA lead; the mock follows. Most visitors are on a phone, and
+  /* Headline and CTA lead; the screenshot follows. Most visitors are on a phone, and
      the fold is worth more to the pitch than to the screenshot. */
+  /* Wider than the old CSS mockup wanted: this is a real screen full of real
+     text, and shrinking it too far makes the debrief illegible. */
   .hero__visual {
-    max-width: 300px;
+    max-width: 320px;
     margin: 44px auto 0;
   }
 }
 @media (max-width: 560px) {
-  .hero__visual { max-width: 250px; }
+  .hero__visual { max-width: 288px; }
 }
 
-/* --- 7. Phone mock (hero visual) ---------------------------------------- */
+/* --- 7. Phone frame + real app screenshots ------------------------------- */
+/* The screens are genuine screenshots, not mockups: assets/img/screens/*.jpg,
+   produced by scripts/make-screenshots.sh. The frame therefore takes its
+   height from the image rather than an aspect-ratio, so a screenshot from a
+   differently-shaped iPhone still sits flush in it. */
 
 .phone {
   position: relative;
   width: min(340px, 100%);
   margin-inline: auto;
-  aspect-ratio: 9 / 18.6;
   padding: 11px;
   border-radius: 44px;
   background: linear-gradient(160deg, #26262e, #0b0b0e 42%, #1c1c22);
@@ -577,106 +582,73 @@ h3, .h3 { font-size: clamp(1.15rem, 2.1vw, 1.4rem); letter-spacing: -0.02em; }
     0 0 90px -20px var(--purple-glow);
   will-change: transform;
 }
-.phone::before { /* notch */
+.phone::before { /* Dynamic Island — screenshots don't capture it */
   content: "";
   position: absolute;
   top: 20px; left: 50%;
-  width: 96px; height: 25px;
+  width: 100px; height: 29px;
   transform: translateX(-50%);
   border-radius: var(--radius-pill);
   background: #08080a;
   z-index: 3;
 }
 .phone__screen {
-  position: relative;
-  height: 100%;
-  padding: 46px 17px 20px;
+  display: block;
+  width: 100%;
+  height: auto;
   border-radius: 34px;
-  background: radial-gradient(120% 80% at 50% 0%, #16101f, #050506 62%);
-  overflow: hidden;
+  background: #050506; /* holds the shape while the screenshot loads */
 }
 
-.mock-head {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  margin-bottom: 14px;
+/* The hero screenshot ends on the route-replay map, which is blurred out for
+   the driver's privacy (scripts/make-screenshots.sh). Fading that last strip
+   into the app's own black turns a smear into a deliberate-looking edge. */
+.hero__visual .phone::after {
+  content: "";
+  position: absolute;
+  left: 11px; right: 11px; bottom: 11px;
+  height: 15%;
+  border-radius: 0 0 34px 34px;
+  background: linear-gradient(to bottom, rgba(5, 5, 6, 0), #050506 72%);
+  pointer-events: none;
+  z-index: 2;
 }
-.mock-title { font-size: 15px; font-weight: 700; letter-spacing: -0.02em; }
-.mock-sub { color: var(--ink-faint); font-size: 10.5px; }
 
-.mock-score {
-  position: relative;
+/* Smaller frame for the screenshot gallery */
+.phone--sm { width: min(252px, 100%); padding: 8px; border-radius: 34px; }
+.phone--sm::before { top: 15px; width: 74px; height: 22px; }
+.phone--sm .phone__screen { border-radius: 27px; }
+
+.screens {
   display: grid;
-  place-items: center;
-  margin: 4px auto 16px;
-  width: 132px; height: 132px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(26px, 4vw, 44px);
 }
-.mock-score svg { position: absolute; inset: 0; transform: rotate(-90deg); }
-.mock-score .ring-bg { stroke: rgba(255, 255, 255, 0.08); }
-.mock-score .ring-fg {
-  stroke: url(#cuGrad);
-  stroke-linecap: round;
-  stroke-dasharray: 364;
-  stroke-dashoffset: 364;
-  animation: ring 2.1s 0.5s var(--ease-out) forwards;
-}
-@keyframes ring { to { stroke-dashoffset: 76; } }
-
-.mock-score__val {
+.screen { margin: 0; }
+.screen figcaption {
+  margin-top: 18px;
   text-align: center;
-  line-height: 1;
+  color: var(--ink-soft);
+  font-size: 14px;
+  line-height: 1.55;
+  text-wrap: balance;
 }
-.mock-score__num {
+.screen figcaption strong {
   display: block;
-  font-size: 40px;
-  font-weight: 750;
-  letter-spacing: -0.05em;
-  font-variant-numeric: tabular-nums;
-}
-.mock-score__label {
-  display: block;
-  margin-top: 5px;
-  color: var(--ink-faint);
-  font-size: 9.5px;
-  font-weight: 600;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
+  margin-bottom: 3px;
+  color: var(--ink);
+  font-size: 15.5px;
+  letter-spacing: -0.01em;
 }
 
-.mock-rows { display: grid; gap: 7px; }
-.mock-row {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  padding: 9px 11px;
-  border: 1px solid var(--hairline);
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.035);
-  font-size: 11.5px;
-  opacity: 0;
-  animation: mock-in 0.65s var(--ease-out) forwards;
+@media (max-width: 900px) {
+  .screens { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .screen:last-child { grid-column: 1 / -1; }
 }
-.mock-row:nth-child(1) { animation-delay: 0.85s; }
-.mock-row:nth-child(2) { animation-delay: 1s; }
-.mock-row:nth-child(3) { animation-delay: 1.15s; }
-.mock-row:nth-child(4) { animation-delay: 1.3s; }
-
-@keyframes mock-in {
-  from { opacity: 0; transform: translateY(10px); }
-  to   { opacity: 1; transform: none; }
+@media (max-width: 620px) {
+  .screens { grid-template-columns: 1fr; gap: 40px; }
+  .screen:last-child { grid-column: auto; }
 }
-
-.mock-dot {
-  flex: none;
-  width: 7px; height: 7px;
-  border-radius: 50%;
-  background: var(--clean);
-  box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.16);
-}
-.mock-dot--minor { background: var(--minor); box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.16); }
-.mock-dot--serious { background: var(--serious); box-shadow: 0 0 0 3px rgba(251, 113, 133, 0.16); }
-.mock-row span:last-child { margin-left: auto; color: var(--ink-faint); font-size: 10.5px; }
 
 /* Floating stat chips beside the phone */
 .phone-chip {
@@ -1498,8 +1470,6 @@ h3, .h3 { font-size: clamp(1.15rem, 2.1vw, 1.4rem); letter-spacing: -0.02em; }
   .eyebrow::before { animation: none !important; }
   .aurora { opacity: 0.7; }
 
-  .mock-row { opacity: 1; animation: none !important; }
-  .mock-score .ring-fg { animation: none !important; stroke-dashoffset: 76; }
 
   .steps::before { transform: scaleX(1) !important; transition: none !important; }
 

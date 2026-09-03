@@ -13,7 +13,7 @@
  *   node scripts/verify-legal.mjs [path-to-app-repo]
  */
 
-import { readFileSync, existsSync } from 'node:fs';
+import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { dirname, resolve, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { homedir } from 'node:os';
@@ -115,6 +115,54 @@ for (const doc of docs) {
     }
     if (!hasVersion) console.log(`      version ${version} not shown on the page`);
     if (!hasDate) console.log(`      effective date "${pretty}" not shown on the page`);
+    console.log('');
+  }
+}
+
+/* ── One support address, everywhere ─────────────────────────────────────── */
+/* The address is published in the Privacy Policy, so every mailto: on the site
+   has to agree with it. This exists because it went wrong once: the address was
+   changed across the site by hand while the /privacy and /terms page templates
+   in build-legal.mjs kept the old one, and the two documents that matter most
+   ended up telling people to write to a mailbox nobody reads. */
+
+const privacyMd = readFileSync(join(appRepo, 'lib/legal/privacy.ts'), 'utf8');
+const contact = privacyMd.match(/\*\*Contact:\*\*\s*([A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,})/);
+
+if (!contact) {
+  console.log('  ✗ the Privacy Policy has no "**Contact:** <email>" line\n');
+  failed = true;
+} else {
+  const expected = contact[1];
+  const pages = [];
+  const walk = (dir) => {
+    for (const e of readdirSync(dir, { withFileTypes: true })) {
+      if (e.name === 'node_modules' || e.name.startsWith('.')) continue;
+      const full = join(dir, e.name);
+      if (e.isDirectory()) walk(full);
+      else if (e.name.endsWith('.html')) pages.push(full);
+    }
+  };
+  walk(SITE_ROOT);
+
+  const strays = new Map();
+  for (const file of pages) {
+    for (const [, addr] of readFileSync(file, 'utf8').matchAll(/mailto:([^"'?>\s]+)/g)) {
+      if (addr !== expected) {
+        const rel = file.slice(SITE_ROOT.length + 1);
+        strays.set(`${rel} → ${addr}`, (strays.get(`${rel} → ${addr}`) || 0) + 1);
+      }
+    }
+  }
+
+  if (strays.size === 0) {
+    console.log(`  ✓ support address`);
+    console.log(`      every mailto: across ${pages.length} pages is ${expected}\n`);
+  } else {
+    failed = true;
+    console.log('  ✗ support address');
+    console.log(`      the Privacy Policy publishes ${expected}, but these disagree:`);
+    for (const [where, n] of strays) console.log(`        ${where}${n > 1 ? ` (×${n})` : ''}`);
     console.log('');
   }
 }

@@ -106,39 +106,15 @@
         <p class="ios-note hero-in" style="--i:5; margin-top:12px">iPhone only — not yet available on Android.</p>
       </div>
 
-      <!-- Phone mock -->
+      <!-- Phone: a real screenshot of the app, not a mockup. All the screens
+           on this site come from scripts/make-screenshots.sh — see that file
+           before swapping any of them. -->
       <div class="hero__visual hero-in" style="--i:2" data-parallax="0.05">
         <div class="phone">
-          <div class="phone__screen">
-            <div class="mock-head">
-              <span class="mock-title">Drive debrief</span>
-              <span class="mock-sub">32 min · 14.2 mi</span>
-            </div>
-
-            <div class="mock-score">
-              <svg viewBox="0 0 132 132" aria-hidden="true">
-                <defs>
-                  <linearGradient id="cuGrad" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0%" stop-color="#9B4DF2"/>
-                    <stop offset="100%" stop-color="#7B26DC"/>
-                  </linearGradient>
-                </defs>
-                <circle class="ring-bg" cx="66" cy="66" r="58" fill="none" stroke-width="9"/>
-                <circle class="ring-fg" cx="66" cy="66" r="58" fill="none" stroke-width="9"/>
-              </svg>
-              <span class="mock-score__val">
-                <span class="mock-score__num">4</span>
-                <span class="mock-score__label">Driver faults</span>
-              </span>
-            </div>
-
-            <div class="mock-rows">
-              <div class="mock-row"><i class="mock-dot"></i> Observation at junctions <span>Clean</span></div>
-              <div class="mock-row"><i class="mock-dot mock-dot--minor"></i> Approach speed <span>2 minors</span></div>
-              <div class="mock-row"><i class="mock-dot mock-dot--serious"></i> Mirror before signal <span>Review</span></div>
-              <div class="mock-row"><i class="mock-dot"></i> Steering &amp; positioning <span>Clean</span></div>
-            </div>
-          </div>
+          <img class="phone__screen"
+               src="assets/img/screens/drive-summary.jpg" width="640" height="1387"
+               fetchpriority="high" decoding="async"
+               alt="The ClutchUp drive summary screen: a practice drive marked Pass at 82 out of 100, above a written end-of-drive debrief noting no harsh braking, acceleration or speeding, clear mirror checks on four of five turns, and a slow spell around the 13-minute mark.">
         </div>
         <div class="phone-chip phone-chip--a"><i class="dot"></i> Live speed limit</div>
         <div class="phone-chip phone-chip--b"><i class="dot"></i> Mirror check detected</div>
@@ -240,6 +216,60 @@
         <h3>Instructor dashboard</h3>
         <p>Driving instructors can connect with a student — with the student's explicit consent — and follow their practice drives between lessons.</p>
       </article>
+    </div>
+  </div>
+</section>
+
+<!-- REAL SCREENS -->
+<section class="section section--tight" id="screens">
+  <div class="wrap">
+    <div class="section-head section-head--center reveal">
+      <h2>This is the actual app.</h2>
+      <p class="lede">
+        Every screen here is a straight screenshot from a real practice drive — no mockups,
+        no renders, nothing we haven't built.
+      </p>
+    </div>
+
+    <div class="screens" data-stagger>
+      <figure class="screen reveal">
+        <div class="phone phone--sm">
+          <img class="phone__screen"
+               src="assets/img/screens/home.jpg" width="640" height="1387"
+               loading="lazy" decoding="async"
+               alt="The ClutchUp home screen, with a large Start a drive button offering Free Drive or a Guided Route, above a list of recent drives showing their date, distance and length.">
+        </div>
+        <figcaption>
+          <strong>Start a drive</strong>
+          Free Drive or a Guided Route, with your recent drives waiting underneath.
+        </figcaption>
+      </figure>
+
+      <figure class="screen reveal">
+        <div class="phone phone--sm">
+          <img class="phone__screen"
+               src="assets/img/screens/your-drives.jpg" width="640" height="1387"
+               loading="lazy" decoding="async"
+               alt="The Your drives screen: a score trend chart across the last seven drives reading 84 out of 100, a fault mix bar showing seven minor faults, a pass rate of seven out of seven, and the full list of drives below.">
+        </div>
+        <figcaption>
+          <strong>Watch the trend</strong>
+          Your score across recent drives, the mix of faults behind it, and every drive you've done.
+        </figcaption>
+      </figure>
+
+      <figure class="screen reveal">
+        <div class="phone phone--sm">
+          <img class="phone__screen"
+               src="assets/img/screens/subscription.jpg" width="640" height="1387"
+               loading="lazy" decoding="async"
+               alt="The ClutchUp subscription screen showing the three plans — one month at £9.99, three months at £24.99, and six months at £44.99 — with the current plan marked and a Manage subscription button.">
+        </div>
+        <figcaption>
+          <strong>Plans, in the open</strong>
+          The real in-app prices. Buying, switching and cancelling all happen through the App Store.
+        </figcaption>
+      </figure>
     </div>
   </div>
 </section>
@@ -410,7 +440,7 @@
           <h4>Help</h4>
           <a href="support/">Support</a>
           <a href="about/">About</a>
-          <a href="mailto:support@clutchup.co.uk">Email us</a>
+          <a href="mailto:clutchup.support@gmail.com">Email us</a>
         </div>
         <div class="footer__col">
           <h4>Legal</h4>
@@ -420,7 +450,7 @@
       </div>
     </div>
     <div class="footer__bottom">
-      <p><a href="mailto:support@clutchup.co.uk">support@clutchup.co.uk</a> · © <span data-year>2026</span> ClutchUp</p>
+      <p><a href="mailto:clutchup.support@gmail.com">clutchup.support@gmail.com</a> · © <span data-year>2026</span> ClutchUp</p>
       <p class="footer__legal-line">ClutchUp is not affiliated with, endorsed by, or connected to the DVSA, and does not provide official test results.</p>
     </div>
   </div>
