@@ -20,10 +20,14 @@ The static website for ClutchUp, served free on Netlify at
 | `/privacy` | `privacy/index.html` | **App Store Privacy Policy URL** — generated |
 | `/terms` | `terms/index.html` | Generated |
 
-Support email everywhere is **support@clutchup.co.uk**. The legal page BODIES
-still show the old gmail address because they render the app repo's legal
-documents verbatim — update `routeready/lib/legal/*.ts` (with a version bump)
-and re-run `npm run build` here to change them.
+Support email everywhere is **support@clutchup.co.uk**, including the legal
+pages (app repo legal docs are at v1.3, 2026-09-03).
+
+⚠️ **The pricing page's free-tier copy does not match the shipped app.** The
+page says free users get unlimited drives and scores with AI feedback as the
+paid feature; the app actually runs a 365-day / 9,999-drive free trial, after
+which a new drive cannot be started at all. Terms v1.3 describe the shipped
+behaviour. Either ship the free-scores model or correct this page.
 
 ---
 
