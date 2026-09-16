@@ -1570,3 +1570,34 @@ h3, .h3 { font-size: clamp(1.15rem, 2.1vw, 1.4rem); letter-spacing: -0.02em; }
 .data-table tr:hover td { background: rgba(255, 255, 255, 0.025); }
 .data-table .hi { color: var(--clean); font-weight: 650; }
 .data-table .lo { color: var(--serious); font-weight: 650; }
+
+/* --- Recommended mount photos -------------------------------------------- */
+/* A plain framed photo box. Sized by aspect-ratio so the grid holds its shape
+   before the photos are dropped in — an empty frame reads as "photo coming",
+   a collapsed one reads as broken. */
+.mount-shot {
+  margin: 0;
+  aspect-ratio: 4 / 3;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  padding: 10px;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.012));
+  color: var(--ink-soft);
+  font-size: 13px;
+  text-align: center;
+}
+.mount-shot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: calc(var(--radius) - 6px);
+}
+.mount-disclosure {
+  margin-top: 14px;
+  color: var(--ink-soft);
+  font-size: 13px;
+  line-height: 1.6;
+}
