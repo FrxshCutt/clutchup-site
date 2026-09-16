@@ -42,6 +42,7 @@
     <div class="nav__links" id="nav-links">
       <a href="../">Home</a>
       <a href="./" aria-current="page">How it works</a>
+      <a href="../mount/">Mount</a>
       <a href="../pricing/">Pricing</a>
       <a href="../guides/">Guides</a>
       <a href="../support/">Support</a>
@@ -225,56 +226,15 @@
   </div>
 </section>
 
-<!-- ══ RECOMMENDED MOUNT ══════════════════════════════════════════════════
-     Sits directly after the road/face check section: that is where the page
-     tells you the framing has to be right, so it is where "what should I
-     mount it with?" is actually asked.
-     This block is duplicated verbatim on /testers (the site has no
-     templating) — edit both, or neither.
-══════════════════════════════════════════════════════════════════════════ -->
-<section class="section section--tight">
+<!-- The mount recommendation now lives on its own page (/mount, linked in the
+     header). This keeps the contextual hook where the question is actually
+     asked — the framing has to be right — without a third copy of the block. -->
+<section class="section section--tight" style="padding-top:0">
   <div class="wrap wrap--narrow">
-    <div class="panel reveal">
-      <p class="eyebrow">Kit</p>
-      <h2>The mount we recommend</h2>
-      <p class="lede">
-        ClutchUp needs the phone held still and facing the road — that is what the road check
-        confirms, and in face mode it also needs a clear view of you for mirror checks. Any
-        solid windscreen or vent mount works. This is the one we use.
-      </p>
-
-      <div class="grid grid--3" style="margin-top:28px">
-        <!-- Photos: drop your own files into assets/img/mount/ using these exact
-             filenames. See the README in that folder. Never hotlink Amazon's
-             images — against their terms, and the URLs break. -->
-        <figure class="mount-shot">
-          <img src="../assets/img/mount/recommended-mount-1.jpg" alt="Recommended car phone mount, photo 1" loading="lazy" decoding="async">
-        </figure>
-        <figure class="mount-shot">
-          <img src="../assets/img/mount/recommended-mount-2.jpg" alt="Recommended car phone mount, photo 2" loading="lazy" decoding="async">
-        </figure>
-        <figure class="mount-shot">
-          <img src="../assets/img/mount/recommended-mount-3.jpg" alt="Recommended car phone mount, photo 3" loading="lazy" decoding="async">
-        </figure>
-      </div>
-
-      <div class="btn-row">
-        <!-- [PLACEHOLDER — REPLACE WITH REAL AMAZON LINK]
-             Used exactly as supplied and NOT corrected. It is not a standard
-             Amazon URL shape (expected https://amzn.to/… or
-             https://www.amazon.co.uk/dp/B0…), so it very likely will not
-             resolve. Verify it before this goes in front of anyone.
-             Replace in BOTH places: here and /testers/index.html. -->
-        <a class="btn btn--primary" href="https://link.amazon/B0gEI0DPi" target="_blank" rel="noopener">
-          Buy on Amazon
-        </a>
-      </div>
-
-      <!-- AFFILIATE DISCLOSURE — required in the UK (CMA/ASA) only if the link
-           above is actually an affiliate link. If it is a plain product link,
-           delete this single <p> and nothing else. -->
-      <p class="mount-disclosure">As an Amazon Associate, ClutchUp may earn from qualifying purchases.</p>
-    </div>
+    <p class="note reveal">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg>
+      <span>Any solid windscreen or vent mount works. If you haven't got one yet, <a href="../mount/">here's the mount we recommend</a>.</span>
+    </p>
   </div>
 </section>
 
