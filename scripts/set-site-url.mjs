@@ -23,9 +23,16 @@ const ROOT = resolve(__dirname, '..');
 const STATE = join(__dirname, '.site-url');
 const PLACEHOLDER = 'https://SITE-URL-PLACEHOLDER';
 
-const input = process.argv[2];
+/* With no argument, re-apply the URL we stamped last time. `npm run build`
+   relies on this: build-legal.mjs regenerates /privacy and /terms from the app
+   repo and those templates carry the placeholder, so every legal rebuild puts
+   https://SITE-URL-PLACEHOLDER back into their canonical and OpenGraph tags.
+   Chaining this script onto the build takes it straight back out again. */
+const input = process.argv[2] || (existsSync(STATE) ? readFileSync(STATE, 'utf8').trim() : '');
 if (!input) {
-  console.error('\nUsage: node scripts/set-site-url.mjs <https://your-site-url>\n');
+  console.error('\nUsage: node scripts/set-site-url.mjs <https://your-site-url>');
+  console.error('(no argument given and scripts/.site-url does not exist yet, so');
+  console.error(' there is no previous value to fall back on)\n');
   process.exit(1);
 }
 

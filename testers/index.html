@@ -93,9 +93,13 @@
              first hop. That is not a broken link — link.amazon sends
              `vary: User-Agent` and does not answer HEAD. Test it with a GET
              that follows redirects (`curl -sSL`) or in a browser.
+             rel="sponsored" is there because it IS a paid link — Google asks
+             for it on affiliate links, and without it the page passes ranking
+             credit to Amazon on a link we are paid for. rel="noopener" stays
+             for target="_blank".
              If it ever needs changing, change it in BOTH places: here and
              /testers/index.html. -->
-        <a class="btn btn--primary" href="https://link.amazon/B0gEI0DPi" target="_blank" rel="noopener">
+        <a class="btn btn--primary" href="https://link.amazon/B0gEI0DPi" target="_blank" rel="noopener sponsored">
           Buy on Amazon
         </a>
       </div>
