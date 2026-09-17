@@ -75,6 +75,39 @@ the legal pages and stamp in URLs. They are not part of serving the site.
 
 ---
 
+## How this site actually deploys — read before adding CI
+
+**Netlify, watching `main`. Push to GitHub and the site is live in about
+fifteen seconds.** That is the whole pipeline. `netlify.toml` declares an
+empty build command and publishes the repo root, so Netlify copies the files
+and serves them.
+
+**There is deliberately no GitHub Actions workflow.** There used to be one
+(`.github/workflows/deploy.yml`, from the original scaffold) that published to
+GitHub Pages. Pages was never enabled on the repo, so it failed on every push
+from 2026-09-03 to 2026-09-17 — thirty-odd red crosses and a failure email
+each time — while Netlify quietly deployed every one of those commits
+successfully. It was removed on 2026-09-17.
+
+If you are ever tempted to add it back, don't, unless you are moving off
+Netlify. Two hosts publishing the same repo means two copies of the site at
+two URLs, and the one on `github.io` has no custom domain, so it silently goes
+stale and starts competing with `clutchup.co.uk` in search results.
+
+**A red cross in the Actions tab has never meant the website failed to
+update.** To check whether a change is actually live, ask the live site, not
+GitHub:
+
+```bash
+curl -s "https://clutchup.co.uk/?cb=$RANDOM" | grep -c 'some text you just added'
+```
+
+A browser showing an old version after that returns `1` is a browser cache:
+hard-reload with Cmd-Shift-R (Ctrl-Shift-R on Windows), or open the URL with a
+`?cb=123` on the end.
+
+---
+
 ## Deploy free to Netlify, on clutchup.co.uk
 
 **Why Netlify here rather than Cloudflare Pages:** both are free and both give
