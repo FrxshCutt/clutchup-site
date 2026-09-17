@@ -183,32 +183,39 @@
              hotlinked — Amazon's own URLs rot and hotlinking breaches their
              terms. Provenance and swap instructions: the README in that folder. -->
         <figure class="mount-shot">
-          <img src="assets/img/mount/recommended-mount-1.jpg" alt="MRGLAS magnetic car phone mount with its packaging and vent attachment" loading="lazy" decoding="async">
+          <img src="assets/img/mount/recommended-mount-1.jpg" width="679" height="646" alt="MRGLAS magnetic car phone mount with its packaging and vent attachment" loading="lazy" decoding="async">
         </figure>
         <figure class="mount-shot">
-          <img src="assets/img/mount/recommended-mount-2.jpg" alt="The mount works with MagSafe cases, and with regular cases using the included magnetic ring" loading="lazy" decoding="async">
+          <img src="assets/img/mount/recommended-mount-2.jpg" width="679" height="849" alt="The mount works with MagSafe cases, and with regular cases using the included magnetic ring" loading="lazy" decoding="async">
         </figure>
         <figure class="mount-shot">
-          <img src="assets/img/mount/recommended-mount-3.jpg" alt="The mount on a dashboard, showing its 210 degree arm, 360 degree head and folded size" loading="lazy" decoding="async">
+          <img src="assets/img/mount/recommended-mount-3.jpg" width="679" height="835" alt="The mount on a dashboard, showing its 210 degree arm, 360 degree head and folded size" loading="lazy" decoding="async">
         </figure>
       </div>
 
       <div class="btn-row">
-        <!-- [PLACEHOLDER — REPLACE WITH REAL AMAZON LINK]
-             Used exactly as supplied and NOT corrected. It is not a standard
-             Amazon URL shape (expected https://amzn.to/… or
-             https://www.amazon.co.uk/dp/B0…). Checked on 17 Sep 2026: the
-             host link.amazon resolves but this path returns HTTP 404, so the
-             button currently leads nowhere. Replace before it matters.
-             Replace in BOTH places: here and /testers/index.html. -->
+        <!-- Zach's Amazon Associates link (SiteStripe short form). Verified
+             17 Sep 2026 — the full chain is:
+               link.amazon/B0gEI0DPi  302→  amzlinks.in/B0gEI0DPi  302→
+               amazon.co.uk/…/dp/B0DY122XRP?…&linkCode=sl2&tag=clutchup-21
+             HTTP 200, and the tag=clutchup-21 credit survives to the
+             destination, so commission tracks. ASIN B0DY122XRP is the MRGLAS
+             mount in the photos above.
+             Note for anyone re-checking it: `curl -I` returns 404 on the
+             first hop. That is not a broken link — link.amazon sends
+             `vary: User-Agent` and does not answer HEAD. Test it with a GET
+             that follows redirects (`curl -sSL`) or in a browser.
+             If it ever needs changing, change it in BOTH places: here and
+             /testers/index.html. -->
         <a class="btn btn--primary" href="https://link.amazon/B0gEI0DPi" target="_blank" rel="noopener">
           Buy on Amazon
         </a>
       </div>
 
-      <!-- AFFILIATE DISCLOSURE — required in the UK (CMA/ASA) only if the link
-           above is actually an affiliate link. If it is a plain product link,
-           delete this single <p> and nothing else. -->
+      <!-- AFFILIATE DISCLOSURE — required, and must stay. The link above is a
+           genuine affiliate link (tag=clutchup-21), so the CMA and the ASA
+           require the commercial relationship to be disclosed up front, next
+           to the link rather than buried. Do not delete this <p>. -->
       <p class="mount-disclosure">As an Amazon Associate, ClutchUp may earn from qualifying purchases.</p>
     </div>
   </div>
