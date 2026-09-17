@@ -257,7 +257,7 @@ function page({ slugPath, title, metaTitle, description, version, effective, toc
     <div class="nav__links" id="nav-links">
       <a href="../">Home</a>
       <a href="../how-it-works/">How it works</a>
-      <a href="../mount/">Mount</a>
+      <a href="../#mount">Mount</a>
       <a href="../pricing/">Pricing</a>
       <a href="../guides/">Guides</a>
       <a href="../support/">Support</a>
@@ -330,7 +330,7 @@ ${body}
           <h4>Product</h4>
           <a href="../">Home</a>
           <a href="../how-it-works/">How it works</a>
-          <a href="../mount/">Mount</a>
+          <a href="../#mount">Mount</a>
           <a href="../pricing/">Pricing</a>
         </div>
         <div class="footer__col">

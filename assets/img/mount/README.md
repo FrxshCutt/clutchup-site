@@ -1,22 +1,27 @@
 # Recommended-mount photos
 
-Drop your own product photos in here with these exact filenames. The pages
-reference them already — no code change needed once the files exist.
+Three photos, referenced by these exact filenames:
 
-    recommended-mount-1.jpg
-    recommended-mount-2.jpg
-    recommended-mount-3.jpg
+    recommended-mount-1.jpg   product and packaging on white
+    recommended-mount-2.jpg   "Design for MagSafe"
+    recommended-mount-3.jpg   "INFINITE ANGLES / 210°"
 
 Used by:
-  • /how-it-works  (the "The mount we recommend" section)
+  • /          (the "The mount we recommend" section on the home page)
   • /testers
 
 Notes
-  • Landscape-ish works best: the frames are 4:3 and the image is
-    object-fit: cover, so anything close to that crops cleanly.
-  • ~1200px wide is plenty; keep them under a few hundred KB each.
-  • Do NOT hotlink or copy Amazon's own product images — against their terms,
-    and the URLs rot. These must be your own photos (or ones you are
-    licensed to use).
-  • Until the files exist the frames show their alt text, which is intended:
-    the layout stays put and nothing looks broken.
+  • The frames are portrait (aspect-ratio 4/5) and the image is
+    object-fit: **contain**, so each photo is shown whole whatever its
+    exact ratio. These three are 679×646, 679×849 and 679×835. Contain,
+    not cover, because the marketing text is baked into the photos and a
+    crop ate it.
+  • Keep them under a few hundred KB each.
+  • **Provenance.** These are the manufacturer's own listing images,
+    supplied by Zach — not photos taken for ClutchUp. They are not
+    hotlinked (which would break and breach Amazon's terms), but copying
+    a seller's product images still needs the rights holder's permission.
+    The clean routes are the manufacturer's written OK, the Amazon Product
+    Advertising API, or a photo of the mount in the car. Swapping the files
+    is all it takes — nothing references the images by anything but these
+    three names.

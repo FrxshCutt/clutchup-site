@@ -59,7 +59,7 @@
     <div class="nav__links" id="nav-links">
       <a href="./" aria-current="page">Home</a>
       <a href="how-it-works/">How it works</a>
-      <a href="mount/">Mount</a>
+      <a href="#mount">Mount</a>
       <a href="pricing/">Pricing</a>
       <a href="guides/">Guides</a>
       <a href="support/">Support</a>
@@ -157,6 +157,59 @@
 
     <div class="btn-row reveal" style="justify-content:center">
       <a class="btn btn--ghost" href="how-it-works/">Read the full walkthrough <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ RECOMMENDED MOUNT ═══════════════════════════════════════════════════
+     Sits straight after the four steps because step 1 is "Mount your phone"
+     — this answers the question that step raises, while the reader is asking
+     it. /how-it-works links to #mount; /testers keeps its own duplicate (no
+     templating on this site, so those two copies are edited by hand).
+═══════════════════════════════════════════════════════════════════════════ -->
+<section class="section section--tight" id="mount">
+  <div class="wrap">
+    <div class="panel reveal">
+      <p class="eyebrow">Kit</p>
+      <h2>The mount we recommend</h2>
+      <p class="lede">
+        ClutchUp needs the phone held still and facing the road — that is what the road check
+        confirms, and in face mode it also needs a clear view of you for mirror checks. Any
+        solid windscreen or vent mount works. This is the one we use.
+      </p>
+
+      <div class="grid grid--3" style="margin-top:28px">
+        <!-- Photos live in assets/img/mount/ and are served from there, never
+             hotlinked — Amazon's own URLs rot and hotlinking breaches their
+             terms. Provenance and swap instructions: the README in that folder. -->
+        <figure class="mount-shot">
+          <img src="assets/img/mount/recommended-mount-1.jpg" alt="MRGLAS magnetic car phone mount with its packaging and vent attachment" loading="lazy" decoding="async">
+        </figure>
+        <figure class="mount-shot">
+          <img src="assets/img/mount/recommended-mount-2.jpg" alt="The mount works with MagSafe cases, and with regular cases using the included magnetic ring" loading="lazy" decoding="async">
+        </figure>
+        <figure class="mount-shot">
+          <img src="assets/img/mount/recommended-mount-3.jpg" alt="The mount on a dashboard, showing its 210 degree arm, 360 degree head and folded size" loading="lazy" decoding="async">
+        </figure>
+      </div>
+
+      <div class="btn-row">
+        <!-- [PLACEHOLDER — REPLACE WITH REAL AMAZON LINK]
+             Used exactly as supplied and NOT corrected. It is not a standard
+             Amazon URL shape (expected https://amzn.to/… or
+             https://www.amazon.co.uk/dp/B0…). Checked on 17 Sep 2026: the
+             host link.amazon resolves but this path returns HTTP 404, so the
+             button currently leads nowhere. Replace before it matters.
+             Replace in BOTH places: here and /testers/index.html. -->
+        <a class="btn btn--primary" href="https://link.amazon/B0gEI0DPi" target="_blank" rel="noopener">
+          Buy on Amazon
+        </a>
+      </div>
+
+      <!-- AFFILIATE DISCLOSURE — required in the UK (CMA/ASA) only if the link
+           above is actually an affiliate link. If it is a plain product link,
+           delete this single <p> and nothing else. -->
+      <p class="mount-disclosure">As an Amazon Associate, ClutchUp may earn from qualifying purchases.</p>
     </div>
   </div>
 </section>
