@@ -7,10 +7,11 @@
   "scripts": {
     "legal": "node scripts/build-legal.mjs",
     "verify": "node scripts/verify-legal.mjs",
-    "build": "npm run legal && npm run set-url && npm run verify",
+    "build": "npm run legal && npm run set-url && npm run verify && npm run check",
     "set-url": "node scripts/set-site-url.mjs",
     "set-appstore": "node scripts/set-appstore-link.mjs",
-    "serve": "npx --yes serve@14 . -l 4321"
+    "serve": "npx --yes serve@14 . -l 4321",
+    "check": "node scripts/check-links.mjs"
   },
   "engines": {
     "node": ">=18"

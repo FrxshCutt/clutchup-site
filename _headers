@@ -18,5 +18,12 @@
   Cache-Control: public, max-age=0, must-revalidate
 /assets/js/*
   Cache-Control: public, max-age=0, must-revalidate
+# A week is fine for images that never change in place. BEWARE: Netlify applies
+# this header to 404s under this path as well, so a <img src> pointing at a file
+# that is not committed yet gets "missing, for seven days" cached in every
+# visitor's browser, and shipping the file later does not reach them. That
+# happened on 16 Sep 2026. `npm run build` now runs scripts/check-links.mjs,
+# which fails the build on any src that does not resolve; the mount photos also
+# carry content hashes so a changed photo always gets a new URL.
 /assets/img/*
   Cache-Control: public, max-age=604800
